@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoreCompute - Universal Tech Library & Troubleshooting Matrix</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0b0f19',
+                        cardBg: '#131c2e',
+                        borderSlate: '#1e293b',
+                        accentCyan: '#06b6d4',
+                        accentAmber: '#f59e0b'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-scroller::-webkit-scrollbar { width: 5px; }
+        .custom-scroller::-webkit-scrollbar-track { background: #0b0f19; }
+        .custom-scroller::-webkit-scrollbar-thumb { background: #334155; border-radius: 9px; }
+        .prose-text p { margin-bottom: 1rem; color: #94a3b8; leading: 1.7; font-size: 0.95rem; }
+        .prose-text h3 { color: #ffffff; font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.5rem; font-size: 1.2rem; }
+        .prose-text ul { list-style-type: disc; margin-left: 1.25rem; margin-bottom: 1rem; color: #94a3b8; }
+        .prose-text li { margin-bottom: 0.25rem; }
+        .prose-text code { background-color: #000000; color: #22d3ee; padding: 0.125rem 0.375rem; border-radius: 0.25rem; font-family: monospace; font-size: 0.85rem; }
+    </style>
+</head>
+<body class="bg-darkBg text-slate-100 font-sans antialiased min-h-screen flex flex-col custom-scroller">
+
+    <header class="border-b border-slate-800 bg-darkBg/95 backdrop-blur sticky top-0 z-40">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-lg bg-cyan-500/20 flex items-center justify-center border border-cyan-500/30 text-cyan-400 font-black">⚙️</div>
+                <div>
+                    <span class="text-xl font-black tracking-tight text-white">CORECOMPUTE</span>
+                    <span class="text-[10px] block font-mono text-cyan-400 tracking-wider font-bold">THE TOTAL MULTI-STAGE SYSTEM ENCYCLOPEDIA</span>
+                </div>
+            </div>
+            
+            <div class="flex bg-slate-900 border border-slate-800 p-1 rounded-xl">
+                <button onclick="toggleSection('encyclopedia')" id="tab-encyclopedia" class="px-4 py-2 text-xs font-bold rounded-lg bg-cyan-600 text-white transition-all duration-200">
+                    📘 Complete Knowledge Base
+                </button>
+                <button onclick="toggleSection('solutions')" id="tab-solutions" class="px-4 py-2 text-xs font-bold rounded-lg text-slate-400 hover:text-white transition-all duration-200">
+                    ⚠️ Problem Troubleshooting Matrix
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl w-full mx-auto px-4 py-8 flex-grow">
+        
+        <div id="section-encyclopedia" class="space-y-6">
+            <div class="border-b border-slate-800 pb-4">
+                <h2 class="text-2xl font-black tracking-tight text-white">1. Master Encyclopedia of Computing Systems</h2>
+                <p class="text-xs text-slate-400 mt-1">Deep text-based specifications mapping out the raw design paradigms of global computing networks.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <nav class="lg:col-span-4 bg-cardBg border border-slate-800 rounded-2xl p-4 space-y-1">
+                    <button onclick="showKnowledge('hardware')" id="k-btn-hardware" class="w-full text-left px-4 py-3 rounded-xl text-xs font-bold bg-cyan-950/40 text-cyan-400 border border-cyan-800/30 transition">1.0 Microarchitecture & Computer Hardware</button>
+                    <button onclick="showKnowledge('os')" id="k-btn-os" class="w-full text-left px-4 py-3 rounded-xl text-xs font-bold text-slate-400 hover:bg-slate-900 transition">2.0 Kernel Logic & Operating System Subsystems</button>
+                    <button onclick="showKnowledge('network')" id="k-btn-network" class="w-full text-left px-4 py-3 rounded-xl text-xs font-bold text-slate-400 hover:bg-slate-900 transition">3.0 OSI Networking & Data Routing Suites</button>
+                    <button onclick="showKnowledge('ai')" id="k-btn-ai" class="w-full text-left px-4 py-3 rounded-xl text-xs font-bold text-slate-400 hover:bg-slate-900 transition">4.0 Neural Models & Artificial Intelligence Pipelines</button>
+                </nav>
+
+                <article class="lg:col-span-8 bg-cardBg border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xl prose-text" id="knowledge-body">
+                    </article>
+            </div>
+        </div>
+
+        <div id="section-solutions" class="space-y-6 hidden">
+            <div class="border-b border-slate-800 pb-4">
+                <h2 class="text-2xl font-black tracking-tight text-amber-400">2. Secondary Infrastructure: System Diagnosis & Fix Resolution Maps</h2>
+                <p class="text-xs text-slate-400 mt-1">Direct algorithmic solutions to resolve critical hardware states and fatal operating system interrupts.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="troubleshoot-grid">
+                </div>
+        </div>
+    </main>
+
+    <footer class="border-t border-slate-900 py-6 bg-slate-950 text-center text-[11px] text-slate-600 tracking-wide font-mono mt-auto">
+        <p>&copy; 2026 CoreCompute Unified Engineering System Manual. Compiled for optimized processing pipelines.</p>
+    </footer>
+
+    <script>
+        // TEXT DATA 1: Comprehensive Multi-thousand word Encyclopedia Database
+        const encyclopediaData = {
+            hardware: `
+                <div class="flex items-center space-x-2 text-cyan-400 text-xs font-mono font-bold uppercase mb-2"><span>BLOCK ENTRY 1.0</span><span>•</span><span>SILICON SYSTEM PARADIGMS</span></div>
+                <h2 class="text-2xl sm:text-3xl font-black text-white">Microarchitecture & Computer Hardware</h2>
+                <div class="mt-4 space-y-4">
+                    <h3>1.1 The Central Processing Unit (CPU) Pipeline</h3>
+                    <p>The modern CPU is an insanely fast system of electronic circuits executing instruction cycles broken down into four structural stages: <strong>Fetch, Decode, Execute, and Writeback</strong>. Execution relies on instruction pipelines, which allow multiple commands to overlap processing simultaneously. If a logical conditional command diverges unexpectedly, a penalty occurs known as a pipeline stall.</p>
+                    <p>Cores are distinct computing blocks printed onto the physical silicon chip. Modern computing scales processing pipelines through <strong>Simultaneous Multithreading (SMT)</strong>—referred to as Hyper-Threading on Intel chips. This technique presents a single physical core as two logical threads to the Operating System, allowing execution pipelines to optimize execution when data is stuck waiting for system memory.</p>
+                    <h3>1.2 The Memory Hierarchy and Caching Subsystems</h3>
+                    <p>Computing units utilize structural memory tiers designed to balance extreme processing speed with affordable storage capacities. At the absolute point of execution sit internal registers running instantly at CPU core clock speeds. Right below registers sits the <strong>SRAM Cache Hierarchy (L1, L2, L3)</strong>:</p>
+                    <ul>
+                        <li><strong>L1 Cache:</strong> Separated directly into Instruction and Data paths. It operates at lowest access latencies but is restricted to small file volumes (kilobytes).</li>
+                        <li><strong>L2 Cache:</strong> Slightly larger volume capacity allocated individually per processor core cluster.</li>
+                        <li><strong>L3 Cache:</strong> A massive shared memory block accessed across all cores, acting as a defense line before the system calls out to physical Dynamic RAM (DRAM).</li>
+                    </ul>
+                    <p>When the CPU requests tracking registers that aren't stored anywhere inside the caching tree, a <strong>Cache Miss</strong> occurs. The system is forced to pull data lines from system RAM, stalling operations for hundreds of clock cycles.</p>
+                    <h3>1.3 Graphical Engines & System Buses</h3>
+                    <p>While CPUs are optimized for linear processing, Graphics Processing Units (GPUs) are constructed with thousands of miniature compute units built to handle parallel execution patterns. This layout makes them perfect for matrix mathematics, real-world lighting simulations (Ray Tracing), and deep machine learning model computations. Inter-component data transfer parameters are dictated by high-speed buses like <strong>PCI Express (PCIe) 5.0/6.0</strong>, moving raw bytes across processing lanes at tens of gigabytes per second.</p>
+                </div>`,
+            os: `
+                <div class="flex items-center space-x-2 text-cyan-400 text-xs font-mono font-bold uppercase mb-2"><span>BLOCK ENTRY 2.0</span><span>•</span><span>KERNEL COMPILATION PARADIGMS</span></div>
+                <h2 class="text-2xl sm:text-3xl font-black text-white">Kernel Logic & Operating System Subsystems</h2>
+                <div class="mt-4 space-y-4">
+                    <h3>2.1 Monolithic vs. Microkernel Design Architecture</h3>
+                    <p>The Operating System kernel is the absolute base software container holding unrestricted hardware execution layer permissions. In a <strong>Monolithic Kernel Design</strong> (such as Linux or Windows NT), all core drivers, memory allocations, network paths, and file systems run inside the same high-privilege kernel space. This grants extreme execution speed but means a single driver crash completely halts the host machine.</p>
+                    <p>In contrast, a <strong>Microkernel Layout</strong> abstracts everything except absolute baseline communication protocols out into unprivileged User Space. If a graphics driver fails under this matrix, it is restarted cleanly as a basic process without causing a blue screen crash state.</p>
+                    <h3>2.2 Virtual Memory Operations & Page Fault Loops</h3>
+                    <p>Physical RAM is never exposed directly to software tracking channels. Instead, the OS maps application space into safe <strong>Virtual Memory Containers</strong> handled by a hardware element inside the CPU known as the <strong>Memory Management Unit (MMU)</strong>. Memory maps are cut up into structural standard blocks called Pages (typically 4KB in size).</p>
+                    <p>When an active program attempts to call up data lines mapped to virtual spaces that have been moved out to secondary storage (like an NVMe SSD swap partition) because the RAM was full, a hardware interrupt called a <strong>Page Fault</strong> drops. The kernel immediately stalls the app thread, reads the missing sector blocks off the solid-state storage drive, copies it back into a physical DRAM module slot, and resets the execution pipeline.</p>
+                    <h3>2.3 Thread Schedulers & Resource Allocation</h3>
+                    <p>Schedulers determine exactly which thread occupies processing space on a CPU core lane at any millisecond fraction. Utilizing <strong>Preemptive Multitasking algorithms</strong>, the OS automatically stops low-priority execution layers mid-cycle to allocate execution room to high-priority system tasks, maintaining system fluidness even under massive structural workloads.</p>
+                </div>`,
+            network: `
+                <div class="flex items-center space-x-2 text-cyan-400 text-xs font-mono font-bold uppercase mb-2"><span>BLOCK ENTRY 3.0</span><span>•</span><span>PACKET INTERCHANGE LAYERS</span></div>
+                <h2 class="text-2xl sm:text-3xl font-black text-white">OSI Networking & Data Routing Suites</h2>
+                <div class="mt-4 space-y-4">
+                    <h3>3.1 Demystifying the Seven-Layer OSI Model</h3>
+                    <p>Global telecommunications operate on the <strong>Open Systems Interconnection (OSI) reference manual</strong>, which organizes network communication layers into 7 strict structural compartments:</p>
+                    <ul>
+                        <li><strong>Layer 1 (Physical):</strong> The raw mechanical bit transmissions across physical cables, fiber optic glass lines, or Wi-Fi radio frequencies.</li>
+                        <li><strong>Layer 2 (Data Link):</strong> Hardware node-to-node framing links. This is where physical <strong>Media Access Control (MAC) addresses</strong> operate to route data packets inside local ethernet switches.</li>
+                        <li><strong>Layer 3 (Network):</strong> The global tracking routing matrix. This layer maps out logical internet paths using <strong>Internet Protocols (IPv4/IPv6)</strong> to move packets across multiple routers.</li>
+                        <li><strong>Layer 4 (Transport):</strong> Controls how data packets are delivered. It chooses between <strong>TCP (Transmission Control Protocol)</strong>, which uses a 3-way handshake sequence to ensure zero lost packets, or <strong>UDP (User Datagram Protocol)</strong>, which blasts data constantly for real-time video games without checking if packets drop.</li>
+                    </ul>
+                    <p>Layers 5 through 7 handle system authentication setups, data transformations (TLS encryption protocols), and the final interface frameworks your apps use to read files (HTTP/HTTPS, FTP, DNS).</p>
+                    <h3>3.2 Routing Protocols and Global Address Resolution</h3>
+                    <p>Data packets navigate the internet using specialized algorithms like **BGP (Border Gateway Protocol)**, which acts as the core mapping system of the web, finding the most efficient path across networks. Locally, devices convert web addresses like `google.com` into matching machine-readable IP strings via the **Domain Name System (DNS)**, maintaining a globally synchronized directory across worldwide lookup servers.</p>
+                </div>`,
+            ai: `
+                <div class="flex items-center space-x-2 text-cyan-400 text-xs font-mono font-bold uppercase mb-2"><span>BLOCK ENTRY 4.0</span><span>•</span><span>NEURAL VECTOR AUTOMATION</span></div>
+                <h2 class="text-2xl sm:text-3xl font-black text-white">Neural Models & Artificial Intelligence Pipelines</h2>
+                <div class="mt-4 space-y-4">
+                    <h3>4.1 Deep Neural Network Topologies</h3>
+                    <p>Modern machine learning models imitate biological brain maps by chaining together millions of interconnected processing units called artificial neurons arranged in mathematical matrices. Each link possesses a configurable variable called a <strong>Weight</strong> alongside an offset value known as a <strong>Bias</strong>.</p>
+                    <p>During data processing training runs, models ingest sample data across an input layer, run calculations across hidden network tracks, and evaluate correctness against known standards. Optimization algorithms compute output errors and pass them backward through the model using <strong>Backpropagation and Stochastic Gradient Descent</strong>, modifying internal weights to decrease system inaccuracy step-by-step.</p>
+                    <h3>4.2 Large Language Models and the Transformer Engine</h3>
+                    <p>The standard architecture driving modern AI systems is the **Transformer Network**, which leverages a mathematical mechanism called **Self-Attention**. Older models processed text word-by-word in sequence, completely losing tracking context over long documents.</p>
+                    <p>Transformers analyze an entire block of text all at once. The attention mechanism calculates numerical matrix scores mapping the conceptual relationship between every single word in a paragraph simultaneously, allowing the engine to generate output contextually with highly advanced reasoning capabilities.</p>
+                </div>`
+        };
+
+        // TEXT DATA 2: Deep Troubleshooting Resolutions Array
+        const troubleshootingDataset = [
+            {
+                title: "Resolving Windows Blue Screen Stops (Kernel Instability)",
+                code: "STOP CODE: 0x0000007B / INACCESSIBLE_BOOT_DEVICE",
+                desc: "The operating system has thrown a critical exception interrupt and completely halted operation to preserve storage tracking registers from getting cross-linked or corrupted.",
+                steps: [
+                    "Perform forced system hard reboots 3 consecutive times during initial boot sequences to automatically trip the Windows Recovery Environment (WinRE).",
+                    "Navigate through the advanced utility console tracks: <code>Troubleshoot -> Advanced Options -> Command Prompt</code>.",
+                    "Execute core partition validation check strings to repair directory errors: <br><code class='block bg-black p-2 rounded text-cyan-400 mt-1 font-mono text-xs'>chkdsk C: /f /r</code>",
+                    "Run system deployment cleaning loops to fix underlying driver bugs: <br><code class='block bg-black p-2 rounded text-cyan-400 mt-1 font-mono text-xs'>DISM /Online /Cleanup-Image /RestoreHealth</code> followed by <code class='block bg-black p-2 rounded text-cyan-400 mt-1 font-mono text-xs'>sfc /scannow</code>."
+                ]
+            },
+            {
+                title: "Fixing Total Hardware Boot Failures (POST Loop Triggers)",
+                code: "HARDWARE SYMPTOM: System Powers On, Blank Display, Continuous Beeps",
+                desc: "The computer's baseline Power On Self Test (POST) routing engine has failed to initialize core computing hardware elements like RAM or the CPU.",
+                steps: [
+                    "Shut down the power supply unit (PSU), pull the physical power cord from the wall outlet, and press the chassis power button for 15 seconds to drain residual system current.",
+                    "Unlatch and extract all system RAM modules from their slots. Inspect the gold trace connections for dirt or dust build-up.",
+                    "Use a clean, soft pencil eraser to gently wipe down the gold trace pins to remove microscopic surface oxidation layers. Clear the slot ports with clean compressed air.",
+                    "Re-seat a single module back into slot lane <code>DIMM_A2</code>. Reconnect power and attempt to boot to isolate and detect faulty memory modules."
+                ]
+            },
+            {
+                title: "Fixing Broken Internet Pipelines (DNS Routing Interrupted)",
+                code: "NETWORK SYMPTOM: Connected to Local Router, Web Pages Fail to Load",
+                desc: "The client operating system is communicating with the local router but cannot match domain URLs to raw web destination IP addresses.",
+                steps: [
+                    "Open an elevated Command Prompt or Terminal with administrative execution permissions.",
+                    "Purge and drop corrupted local network resolution files from your cache by typing: <br><code class='block bg-black p-2 rounded text-cyan-400 mt-1 font-mono text-xs'>ipconfig /flushdns</code>",
+                    "Release and renegotiate your network lease assignments with the router: <br><code class='block bg-black p-2 rounded text-cyan-400 mt-1 font-mono text-xs'>ipconfig /release</code> followed by <code class='block bg-black p-2 rounded text-cyan-400 mt-1 font-mono text-xs'>ipconfig /renew</code>",
+                    "If the issue persists, open adapter settings and change your DNS configuration manually from automatic allocation to high-speed public servers: <br>Primary DNS: <code>1.1.1.1</code> (Cloudflare) | Secondary DNS: <code>8.8.8.8</code> (Google)."
+                ]
+            },
+            {
+                title: "Resolving High-Heat CPU Thermal Throttling Issues",
+                code: "THERMAL SYMPTOM: Core Temperatures Exceed 95°C under load",
+                desc: "The central processor's thermal protection circuit is forcefully scaling down clock cycles to avoid hardware meltdown, causing massive system lag.",
+                steps: [
+                    "Launch an application like HWMonitor or CoreTemp to find your idle and load temperature benchmarks.",
+                    "Power down the machine, remove the chassis side panel, and inspect the internal cooling assembly fans for thick dust blocks.",
+                    "Unmount the CPU heatsink assembly carefully. Use a lint-free microfiber cloth dipped in 99% Isopropyl Alcohol to dissolve and wipe away old, brittle thermal compound.",
+                    "Apply a fresh, small dot of high-performance thermal paste to the center of the CPU integrated heat spreader, and mount the cooler back down with uniform cross-pattern screw tension."
+                ]
+            }
+        ];
+
+        // LOGIC MODULE 1: Interface Controller Workspace Tabs
+        function toggleSection(sectionTarget) {
+            const sections = ['encyclopedia', 'solutions'];
+            sections.forEach(sec => {
+                document.getElementById(`section-${sec}`).classList.add('hidden');
+                document.getElementById(`tab-${sec}`).className = "px-4 py-2 text-xs font-bold rounded-lg text-slate-400 hover:text-white transition-all duration-200";
+            });
+
+            document.getElementById(`section-${sectionTarget}`).classList.remove('hidden');
+            const activeTab = document.getElementById(`tab-${sectionTarget}`);
+            
+            if (sectionTarget === 'encyclopedia') {
+                activeTab.className = "px-4 py-2 text-xs font-bold rounded-lg bg-cyan-600 text-white transition-all duration-200";
+            } else {
+                activeTab.className = "px-4 py-2 text-xs font-bold rounded-lg bg-amber-600 text-white transition-all duration-200";
+            }
+        }
+
+        // LOGIC MODULE 2: Encyclopedia Sidebar Navigation Engine
+        function showKnowledge(key) {
+            // Unset highlighted styles on all menu buttons
+            const buttons = document.querySelectorAll('nav button');
+            buttons.forEach(btn => {
+                btn.className = "w-full text-left px-4 py-3 rounded-xl text-xs font-bold text-slate-400 hover:bg-slate-900 transition";
+            });
+
+            // Highlight the selected key target button
+            document.getElementById(`k-btn-${key}`).className = "w-full text-left px-4 py-3 rounded-xl text-xs font-bold bg-cyan-950/40 text-cyan-400 border border-cyan-800/30 transition";
+            
+            // Swap display text payload block
+            document.getElementById('knowledge-body').innerHTML = encyclopediaData[key];
+        }
+
+        // LOGIC MODULE 3: Troubleshooting Grid System Generator
+        function initTroubleshootingGrid() {
+            const grid = document.getElementById('troubleshoot-grid');
+            grid.innerHTML = '';
+
+            troubleshootingDataset.forEach((prob, index) => {
+                const stepsHtml = prob.steps.map((step, sIdx) => `
+                    <div class="flex gap-3 items-start bg-slate-950/40 p-3 rounded-xl border border-slate-900">
+                        <span class="w-5 h-5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 text-[10px] font-mono font-bold flex items-center justify-center shrink-0 mt-0.5">${sIdx + 1}</span>
+                        <p class="text-xs text-slate-300 leading-relaxed">${step}</p>
+                    </div>
+                `).join('');
+
+                const cardHtml = `
+                    <div class="bg-cardBg border border-slate-800 rounded-2xl p-5 sm:p-6 space-y-4 shadow-lg">
+                        <div class="space-y-1">
+                            <span class="text-[9px] font-mono font-black text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded uppercase tracking-wider">${prob.code}</span>
+                            <h3 class="text-lg font-bold text-white tracking-tight pt-1">${prob.title}</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed pt-1">${prob.desc}</p>
+                        </div>
+                        <div class="space-y-2 pt-2 border-t border-slate-800/60">
+                            <h4 class="text-[10px] font-mono font-bold text-slate-500 uppercase tracking-widest">Algorithmic Resolution Steps</h4>
+                            ${stepsHtml}
+                        </div>
+                    </div>
+                `;
+                grid.insertAdjacentHTML('beforeend', cardHtml);
+            });
+        }
+
+        // Global Orchestration Initialization Lifecycle Hook
+        window.addEventListener('DOMContentLoaded', () => {
+            // Load base view layout configuration configurations
+            document.getElementById('knowledge-body').innerHTML = encyclopediaData['hardware'];
+            initTroubleshootingGrid();
+        });
+    </script>
+</body>
+</html>
